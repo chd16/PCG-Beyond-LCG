@@ -1,0 +1,96 @@
+This document gives a list of the paramaters required for each generator and scrambler's initialization function along with a list of the avaliable generators and scramblers.
+
+Generators:
+	Include the "generators/generator.h" header
+	Create a generator using the generator object.
+	Use the create_generator(int type) function to select the generator.
+	Use the init_generator(generator *, int, ...) function to initialize the generator.
+	Use the add_scrambler(scrambler *) function to add a scrambler
+	Use get_rn_int() to get an integer
+	Use free_generator(generator *) to free up dynamic data.
+
+	Avalible generators:
+	0. LCG
+		init_rng(int count, [int seed, int multiplier, int increment]);
+		count: Number of initialized paramaters. Accepts 0, 1, 3.
+			If a paramater is not initialized it uses a default value.
+	1. XOR
+		init_rng(int count, [int seed, int shift1, int shift2, int shift3]);
+		count: Number of initialized paramaters. Accepts 0, 1, 4.
+			If a paramater is not initialized it uses a default value.
+	2. MLFG
+		init_rng(int count, int seed, int lower_lag, int upper_lag)
+			count: accepts only 3 initialized paramaters.
+			Requires: lower_lag > 1, upper_lag > 1, upper_lag> lower_lag
+	3. LCG Full Control
+		init_rng(int count, int seed, int selection)
+			count: Only accepts 2 initialized paramaters
+			selection: refers to the selection of values found in lcg_values.h
+	4. Mersen Twister
+		init_rng(int count, int seed)
+			count: Only accepts 1 initialized paramater
+			
+Scramblers:
+	Include the "scramblers/scrambler.h" header
+	Create a scrambler using the scrambler object.
+	Use the create_scrambler(int type) function to select the generator.
+	Use the init_scrambler([varies]) function to initialize the scrambler.
+	Use the init_add_gen(generator*) to add an internal generator if needed.
+
+	Avaliable scramblers:
+	0. lk_hash
+		Uses init_add_gen() to add in an internal source of randomness
+		No inputs needed for init_scrambler()
+	1. random shift
+		init_scrambler(int bit, int drop, [int target])
+			bit: number of bits in the given random number
+			drop: number of bits to be used in determining how many bits are dropped
+			target: maximun number of output bits
+				If target is not provided will auto calculate target as the maximum
+				value that satisfied bit-target-drop>=2^drop, aka: bit-drop-(1<<drop).
+		Restrictions:
+			bit-drop < target: cannot produce more bits, only remove them
+				 and the upper drop bits should always be removed
+			bit > 0, target > 0, drop > 0: Function does not work and is nonsensicle for any
+				value less than 1
+			bit-target - drop >= 2^drop: This prevents the upper '2^drop+drop' bits from overlapping
+				with the lower 'target' bits. If not done then ether bits used in determing the
+				shift amount or unitialized bits  may be used in determing the bits produced
+				in the 'target' about of output bits.
+		Additional work:
+			I had to do some additional work to generisize this scrambler to go from
+			only working on 64 to 32 bit output to being able to work on
+			any arbitratry bit size input and output.
+	2. random rotate
+		init_scrambler(int bit, int rotate);
+			bit: number of bits in the given random number
+			rotate: number of bits used in determining the rotation
+		Restrictions:
+			bit > 0, rotate > 0: Function does not work and is nonsensicle
+				for any value less than 1
+			bit >= 2^rotate: You cannot have rotations bigger than the amount of bits avaliable 
+	3. random xorshift
+		int_scrambler(int bit, int ixor);
+			bit: number of bits in the given random number
+			ixor: number of bits used in determining the amount of bits used in the
+				xor operation
+		Restrictions:
+			bit > 0, ixor > 0: Function does not work and is nonsensicle
+				for any value less than 1
+			bit >= (1<<ixor): You cannor xor more bits than are avaliable
+	4. fixed xorshift
+		init_scrambler(int bit, int ixor);
+			bit: number of bits in the given random number
+			ixor: number of bits to use in the xor operation
+		Restrictions:
+			bit < ixor: You cannot xor more bits than there are avaliable
+				and it makes little sense to xor when bit == ixor
+	5. const multiplier
+		init_scrambler(int bits)
+			bits: total number of bits in generator
+	6. fixed dropshift
+		init_scrambler(bits, target, [shift]))
+			bits: total number of bits in generator
+			target: total number of output bits
+			shift: shift amount, if not provided will default to 
+				bits - target to output only the upper most bits
