@@ -1,0 +1,13 @@
+To add a new generator:
+Create new generator .h and .cpp file using the template.h and template.cpp files
+Modifying makefile to produce the .o file
+Modify select_gen.cpp's switch statement and add the generator number to select_gen.h's list
+Modify generator.cpp's switch statement to properly call the correct initialization functions
+
+
+
+To add a new scrambler:
+Create a new scrambler .h and .cpp file the template.h and template.cpp files
+Modify makefile to produce the .o file
+Modifying select_scram.cpp's switch statement and add the generator number to select_scram.h's list
+Update the documentation.txt file

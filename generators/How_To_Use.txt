@@ -1,0 +1,6 @@
+Include generator.h
+Create a generator pointer with: generator *gen;
+Use create_generator(int) to create a generator (pass in desired generator type's code, current list in select_gen.h)
+Use init_generator(generator*,int...) to initialize the generator (pass in generator pointer, number of paramaters, then the paramaters)
+Get values using gen->get_rn_int()
+Use free_generator(generator*) to clean up memory (pass in generator pointer)
