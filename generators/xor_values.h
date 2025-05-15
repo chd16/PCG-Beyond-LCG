@@ -1,3 +1,6 @@
+#ifndef _xor_values_h_
+#define _xor_values_h_
+
 #include <cstdarg>
 
 const int MAX_SEL_XOR = 84;
@@ -89,3 +92,6 @@ const uint64_t xor_values[][3] = {
 15,19,63,
 5, 47, 23,
 };
+
+
+#endif
