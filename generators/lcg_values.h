@@ -1,3 +1,5 @@
+#ifndef _lcg_values_h_
+#define _lcg_values_h_
 /*Numbers are arranged in the order:
 Multiplier, Const, Mod*/
 #include <cstdarg>
@@ -81,3 +83,4 @@ There are more but I wanted a selection of values
 
 };
 
+#endif
