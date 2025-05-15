@@ -1,5 +1,3 @@
-Currently this is still being edited and needs to be tested properly.
-
 Readme.txt
 This library contains the source code used to test the PCG scrambling techniques as 
 outlined in the paper "Moving the PCG beyond LCGs" by Christopher Draper and Michael Mascagni.
