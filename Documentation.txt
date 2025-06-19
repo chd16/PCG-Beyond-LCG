@@ -49,7 +49,7 @@ Scramblers:
 				If target is not provided will auto calculate target as the maximum
 				value that satisfied bit-target-drop>=2^drop, aka: bit-drop-(1<<drop).
 		Restrictions:
-			bit-drop < target: cannot produce more bits, only remove them
+			bit-drop > target: cannot produce more bits, only remove them
 				 and the upper drop bits should always be removed
 			bit > 0, target > 0, drop > 0: Function does not work and is nonsensicle for any
 				value less than 1
