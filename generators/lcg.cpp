@@ -1,5 +1,5 @@
 /********************************************************************/
-/*               Parallel 32bit generator                           */
+/*               Parallel 64bit generator                           */
 /*               created by christopher draper                      */
 /********************************************************************/
 #include "generator.h"
