@@ -40,7 +40,7 @@ return test->get_rn_int();
 
 void print_err()
 {
- cout << "./driver_mixed.out [0. lcg 1. xor 2. mlfg 3. MT] [0-("<< MAX_SEL<<", " <<MAX_SEL_XOR << ", " << MAX_SEL_MLFG << ", " << 0 << ")] [0.small 1.big 2.print 3.crush] [number of scramblers] [0.dbrs [bit,drop,shift,target] 1.rr[bit,rotate] 2.rxs[bit,ixor] 3.fxs[bit, ixor] 4.CM[bit] 5.DBFX[bit,target] 6.FRS[shift]]" << endl;
+ cout << "./driver_mixed.out [0. lcg 1. xor 2. mlfg 3. MT] [0-("<< MAX_SEL<<", " <<MAX_SEL_XOR << ", " << MAX_SEL_MLFG << ", " << 0 << ")] [0.small 1.big 2.print 3.crush] [number of scramblers] [0.RS [bit,drop,shift,target] 1.RR[bit,rotate] 2.RX[bit,ixor] 3.FX[bit, ixor] 4.CM[bit] 5.FRS[bit,target] 6.FLS[shift]]" << endl;
 }
 
 int main(int argc, const char * argv[])
