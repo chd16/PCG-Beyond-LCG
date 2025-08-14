@@ -17,7 +17,7 @@ return 0;
 //Size of generator, number of bits to select drop, target length of output
 int db_rs::init_scrambler(int bit, int drop, int shift, int target)
 {
-std::cout << bit << " " << drop << " " << shift << " " << target << std::endl;
+//std::cout << bit << " " << drop << " " << shift << " " << target << std::endl;
 //Cannot reac target bit length greater than current bit length
 if ((bit-drop) < target)
 	return -1;
